@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savora - Premium Restaurant Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F8F5F0;
+            --gold: #C7A16A;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.7rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--gold);
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.3s;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--cream);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--cream);
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--cream);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                transform: translateY(30px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            background: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+            padding: 1.5rem;
+            border-left: 3px solid var(--gold);
+            margin: 2rem 0;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 8rem 5%;
+            background: var(--white);
+        }
+
+        .menu h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--black);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .menu-item {
+            background: var(--cream);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+        }
+
+        .menu-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+
+        .menu-info p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .menu-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .menu-cta {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .menu-cta:hover {
+            background: var(--black);
+            color: var(--gold);
+        }
+
+        /* Experience Section */
+        .experience {
+            height: 70vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)),
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .experience h2 {
+            font-size: 3.5rem;
+            color: var(--cream);
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 5%;
+            background: var(--cream);
+        }
+
+        .testimonials h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--black);
+        }
+
+        .testimonial-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 8rem 5%;
+            background: var(--white);
+        }
+
+        .gallery h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--black);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(199, 161, 106, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        /* Reservation */
+        .reservation {
+            padding: 8rem 5%;
+            background: var(--black);
+            color: var(--gold);
+        }
+
+        .reservation h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 1px solid var(--gold);
+            background: rgba(199, 161, 106, 0.1);
+            color: var(--cream);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--gold), #D4AF6A);
+            color: var(--black);
+            padding: 1.2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(199, 161, 106, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(199, 161, 106, 0.5);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 2000;
+        }
+
+        .notification.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Contact */
+        .contact {
+            padding: 8rem 5%;
+            background: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--black);
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--black);
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--gold);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .footer-section p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--cream);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--gold);
+            background: rgba(199, 161, 106, 0.1);
+            color: var(--cream);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter button {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .newsletter button:hover {
+            background: var(--cream);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(199, 161, 106, 0.3);
+            color: var(--cream);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 26, 26, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about,
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 350px;
+            }
+
+            .experience h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+
+            .menu-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">Savora</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reservations">Reservations</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#reservations" class="nav-cta">Book a Table</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Nikmati Sensasi Kuliner yang Memanjakan Indra Anda</h1>
+            <p>Savora menghadirkan perpaduan cita rasa klasik dan sentuhan modern dalam suasana elegan.</p>
+            <div class="cta-group">
+                <a href="#reservations" class="btn-primary">Reservasi Sekarang</a>
+                <a href="#menu" class="btn-secondary">Lihat Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about fade-in" id="about">
+        <div class="about-content">
+            <h2>Filosofi Rasa Kami</h2>
+            <p>Savora lahir dari hasrat untuk menciptakan pengalaman kuliner yang tak terlupakan. Setiap hidangan kami dirancang dengan cermat, menggabungkan bahan-bahan lokal premium dengan teknik memasak kontemporer.</p>
+            <p>Kami percaya bahwa makanan bukan sekadar nutrisi, tetapi sebuah bentuk seni yang menghubungkan orang-orang dengan momen-momen berharga dalam hidup mereka.</p>
+            <div class="quote">"Kami percaya setiap hidangan memiliki cerita yang layak untuk dinikmati."</div>
+            <a href="#contact" class="btn-primary">Pelajari Lebih Lanjut</a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800" alt="Chef at work" class="about-image">
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu fade-in" id="menu">
+        <h2>Signature Dishes</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600" alt="Wagyu Steak">
+                <div class="menu-info">
+                    <h3>Wagyu Steak</h3>
+                    <p>Premium wagyu A5 dimasak sempurna dengan chimichurri dan kentang truffle.</p>
+                    <div class="menu-price">Rp 650.000</div>
+                    <button class="menu-cta">Pesan Sekarang</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600" alt="Tiramisu">
+                <div class="menu-info">
+                    <h3>Savora Tiramisu</h3>
+                    <p>Dessert signature kami dengan espresso premium dan mascarpone Italia.</p>
+                    <div class="menu-price">Rp 125.000</div>
+                    <button class="menu-cta">Pesan Sekarang</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600" alt="Mocktail">
+                <div class="menu-info">
+                    <h3>Signature Mocktail</h3>
+                    <p>Minuman segar dengan campuran buah tropis dan herbal aromatik.</p>
+                    <div class="menu-price">Rp 85.000</div>
+                    <button class="menu-cta">Pesan Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience">
+        <h2>Lebih dari sekadar makan malam — ini adalah pengalaman.</h2>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials fade-in">
+        <h2>Apa Kata Mereka</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200" alt="Customer" class="testimonial-img">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Pengalaman makan malam yang luar biasa! Setiap hidangan penuh cita rasa dan presentasinya sangat memukau. Suasana restoran yang elegan membuat malam kami semakin istimewa."</p>
+                <p class="testimonial-name">— Sarah Wijaya</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200" alt="Customer" class="testimonial-img">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Wagyu steak-nya benar-benar meleleh di mulut! Pelayanannya juga sangat profesional dan attentive. Savora adalah tempat terbaik untuk merayakan momen spesial."</p>
+                <p class="testimonial-name">— Michael Tan</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200" alt="Customer" class="testimonial-img">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Dari appetizer hingga dessert, semuanya sempurna! Truffle risotto-nya adalah yang terbaik yang pernah saya coba. Pasti akan kembali lagi dengan keluarga."</p>
+                <p class="testimonial-name">— Diana Kusuma</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery fade-in" id="gallery">
+        <h2>Menikmati Keindahan di Setiap Sudut</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Gallery 1">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=600" alt="Gallery 2">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600" alt="Gallery 3">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600" alt="Gallery 4">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600" alt="Gallery 5">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Gallery 6">
+                <div class="gallery-overlay"><span>🔍</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation fade-in" id="reservations">
+        <h2>Reservasi Meja Anda</h2>
+        <form class="reservation-form" id="reservationForm">
+            <div class="form-group">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
+            </div>
+            <div class="form-group">
+                <label for="date">Tanggal</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Waktu</label>
+                <select id="time" name="time" required>
+                    <option value="">Pilih waktu</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                    <option value="19:00">07:00 PM</option>
+                    <option value="20:00">08:00 PM</option>
+                    <option value="21:00">09:00 PM</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="guests">Jumlah Tamu</label>
+                <select id="guests" name="guests" required>
+                    <option value="">Pilih jumlah tamu</option>
+                    <option value="1">1 Orang</option>
+                    <option value="2">2 Orang</option>
+                    <option value="3">3 Orang</option>
+                    <option value="4">4 Orang</option>
+                    <option value="5">5 Orang</option>
+                    <option value="6+">6+ Orang</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">Nomor Telepon</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+62 812 3456 7890">
+            </div>
+            <div class="form-group">
+                <label for="notes">Catatan Tambahan</label>
+                <textarea id="notes" name="notes" placeholder="Permintaan khusus atau dietary restrictions..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Kirim Reservasi</button>
+        </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact fade-in" id="contact">
+        <div class="contact-info">
+            <h2>Hubungi Kami</h2>
+            <div class="contact-item">
+                <h3>Alamat</h3>
+                <p>Jl. Kemang Raya No. 88, Jakarta Selatan<br>Indonesia 12730</p>
+            </div>
+            <div class="contact-item">
+                <h3>Jam Buka</h3>
+                <p>Senin - Jumat: 11:00 - 22:00<br>
+                Sabtu - Minggu: 10:00 - 23:00</p>
+            </div>
+            <div class="contact-item">
+                <h3>Kontak</h3>
+                <p>Telepon: +62 21 7198 8800<br>
+                Email: hello@savora.co.id</p>
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="TikTok">🎵</a>
+                <a href="#" aria-label="Threads">🧵</a>
+                <a href="#" aria-label="WhatsApp">💬</a>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.9999999999995!2d106.81659999999999!3d-6.264099999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTUnNTAuOCJTIDEwNsKwNDgnNTkuOCJF!5e0!3m2!1sen!2sid!4v1234567890123" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Savora</h3>
+                <p>Savora adalah restoran premium yang menghadirkan pengalaman kuliner mewah dengan perpaduan cita rasa klasik dan modern dalam suasana yang elegan dan hangat.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigasi</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#reservations">Reservations</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Dapatkan update menu terbaru dan promo eksklusif</p>
+                <div class="newsletter">
+                    <input type="email" placeholder="Email Anda" id="newsletterEmail">
+                    <button id="newsletterBtn">Langganan</button>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Savora. All rights reserved. Designed with ❤️ for culinary excellence.</p>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        ✓ Reservasi Anda telah dikirim! Kami akan menghubungi Anda segera.
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Reservation Form
+        const reservationForm = document.getElementById('reservationForm');
+        const notification = document.getElementById('notification');
+
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Reset form
+            reservationForm.reset();
+            
+            // Hide notification after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        });
+
+        // Newsletter
+        const newsletterBtn = document.getElementById('newsletterBtn');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+
+        newsletterBtn.addEventListener('click', () => {
+            if (newsletterEmail.value) {
+                notification.textContent = '✓ Terima kasih! Anda telah berlangganan newsletter kami.';
+                notification.classList.add('show');
+                newsletterEmail.value = '';
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.textContent = '✓ Reservasi Anda telah dikirim! Kami akan menghubungi Anda segera.';
+                }, 4000);
+            }
+        });
+
+        // Menu item order buttons
+        document.querySelectorAll('.menu-cta').forEach(button => {
+            button.addEventListener('click', () => {
+                notification.textContent = '✓ Item ditambahkan! Silakan lanjutkan ke reservasi untuk memesan.';
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.textContent = '✓ Reservasi Anda telah dikirim! Kami akan menghubungi Anda segera.';
+                }, 3000);
+            });
+        });
+
+        // Set minimum date for reservation to today
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Gallery lightbox effect (simple version)
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                // Simple alert - in production, you'd use a proper lightbox library
+                notification.textContent = '🖼️ Klik kanan untuk menyimpan gambar atau zoom browser untuk memperbesar.';
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.textContent = '✓ Reservasi Anda telah dikirim! Kami akan menghubungi Anda segera.';
+                }, 3000);
+            });
+        });
+
+        // Parallax effect for experience section
+        window.addEventListener('scroll', () => {
+            const experience = document.querySelector('.experience');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.5;
+            
+            if (experience) {
+                experience.style.backgroundPositionY = rate + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
